@@ -42,35 +42,201 @@
       <td>{{ partner.phone || '-' }}</td>
 
       <td class="text-center">
-          <span
-            class="badge"
-            [class.bg-success]="partner.activeContracts > 0"
-            [class.bg-secondary]="partner.activeContracts === 0"
-          >
-            {{ partner.activeContracts }}
-          </span>
+        <span
+          class="badge"
+          [class.bg-success]="partner.activeContracts > 0"
+          [class.bg-secondary]="partner.activeContracts === 0"
+        >
+          {{ partner.activeContracts }}
+        </span>
       </td>
 
       <td class="text-center">
-          <span class="badge bg-secondary">
-            {{ partner.expiredContracts }}
-          </span>
+        <span class="badge bg-secondary">
+          {{ partner.expiredContracts }}
+        </span>
       </td>
 
       <td class="text-end">
-        <button
-          class="btn btn-sm btn-outline-danger"
-          (click)="openDelete(partner)"
-        >
-          Törlés
-        </button>
+        <div class="d-flex justify-content-end gap-2 flex-wrap">
+
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-primary text-nowrap"
+            (click)="openView(partner)"
+          >
+            <i class="bi bi-eye me-1"></i>Megtekintés
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary text-nowrap"
+            disabled
+          >
+            <i class="bi bi-pencil me-1"></i>Szerkesztés
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-danger text-nowrap"
+            (click)="openDelete(partner)"
+          >
+            <i class="bi bi-trash me-1"></i>Törlés
+          </button>
+
+        </div>
       </td>
     </tr>
     </tbody>
   </table>
 </div>
 
-<!-- DELETE CONFIRM MODAL (bekötve TS-ben) -->
+<!-- VIEW MODAL -->
+<div
+  *ngIf="viewingPartner"
+  class="modal fade show d-block"
+  tabindex="-1"
+  style="background: rgba(0, 0, 0, 0.5);"
+  (click)="closeView()"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" (click)="$event.stopPropagation()">
+    <div class="modal-content shadow">
+      <div class="modal-header">
+        <h5 class="modal-title">Partner adatai</h5>
+        <button class="btn-close" (click)="closeView()"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- NAME -->
+        <div class="row border-bottom py-2 align-items-center">
+          <div class="col-4 fw-semibold">Név</div>
+          <div class="col-6">{{ viewingPartner.name }}</div>
+          <div class="col-2 d-flex">
+            <button
+              class="btn btn-sm w-100 text-nowrap"
+              [class.btn-success]="copiedField === 'name'"
+              [class.btn-outline-secondary]="copiedField !== 'name'"
+              (click)="copy(viewingPartner.name, 'name')"
+            >
+              <i class="bi"
+                 [class.bi-check]="copiedField === 'name'"
+                 [class.bi-clipboard]="copiedField !== 'name'"></i>
+              {{ copiedField === 'name' ? 'Másolva' : 'Másolás' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- TAX -->
+        <div class="row border-bottom py-2 align-items-center">
+          <div class="col-4 fw-semibold">Adószám</div>
+          <div class="col-6 font-monospace">{{ viewingPartner.taxNumber }}</div>
+          <div class="col-2 d-flex">
+            <button
+              class="btn btn-sm w-100 text-nowrap"
+              [class.btn-success]="copiedField === 'tax'"
+              [class.btn-outline-secondary]="copiedField !== 'tax'"
+              (click)="copy(viewingPartner.taxNumber, 'tax')"
+            >
+              <i class="bi"
+                 [class.bi-check]="copiedField === 'tax'"
+                 [class.bi-clipboard]="copiedField !== 'tax'"></i>
+              {{ copiedField === 'tax' ? 'Másolva' : 'Másolás' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="row border-bottom py-2 align-items-center">
+          <div class="col-4 fw-semibold">Cím</div>
+          <div class="col-6">{{ viewingPartner.address || '-' }}</div>
+          <div class="col-2 d-flex">
+            <button
+              class="btn btn-sm w-100 text-nowrap"
+              [class.btn-success]="copiedField === 'address'"
+              [class.btn-outline-secondary]="copiedField !== 'address'"
+              (click)="copy(viewingPartner.address, 'address')"
+            >
+              <i class="bi"
+                 [class.bi-check]="copiedField === 'address'"
+                 [class.bi-clipboard]="copiedField !== 'address'"></i>
+              {{ copiedField === 'address' ? 'Másolva' : 'Másolás' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="row border-bottom py-2 align-items-center">
+          <div class="col-4 fw-semibold">Email</div>
+          <div class="col-6">{{ viewingPartner.email || '-' }}</div>
+          <div class="col-2 d-flex">
+            <button
+              class="btn btn-sm w-100 text-nowrap"
+              [class.btn-success]="copiedField === 'email'"
+              [class.btn-outline-secondary]="copiedField !== 'email'"
+              (click)="copy(viewingPartner.email, 'email')"
+            >
+              <i class="bi"
+                 [class.bi-check]="copiedField === 'email'"
+                 [class.bi-clipboard]="copiedField !== 'email'"></i>
+              {{ copiedField === 'email' ? 'Másolva' : 'Másolás' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- PHONE -->
+        <div class="row border-bottom py-2 align-items-center">
+          <div class="col-4 fw-semibold">Telefon</div>
+          <div class="col-6">{{ viewingPartner.phone || '-' }}</div>
+          <div class="col-2 d-flex">
+            <button
+              class="btn btn-sm w-100 text-nowrap"
+              [class.btn-success]="copiedField === 'phone'"
+              [class.btn-outline-secondary]="copiedField !== 'phone'"
+              (click)="copy(viewingPartner.phone, 'phone')"
+            >
+              <i class="bi"
+                 [class.bi-check]="copiedField === 'phone'"
+                 [class.bi-clipboard]="copiedField !== 'phone'"></i>
+              {{ copiedField === 'phone' ? 'Másolva' : 'Másolás' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- ACTIVE -->
+        <div class="row border-bottom py-2 align-items-center">
+          <div class="col-4 fw-semibold">Aktív szerződések</div>
+          <div class="col-6">{{ viewingPartner.activeContracts }}</div>
+          <div class="col-2 d-flex">
+            <button class="btn btn-sm btn-outline-primary w-100 text-nowrap d-flex align-items-center justify-content-center">
+              <i class="bi bi-eye me-1"></i>Megtekintés
+            </button>
+          </div>
+        </div>
+
+        <!-- EXPIRED -->
+        <div class="row py-2 align-items-center">
+          <div class="col-4 fw-semibold">Lejárt szerződések</div>
+          <div class="col-6">{{ viewingPartner.expiredContracts }}</div>
+          <div class="col-2 d-flex">
+            <button class="btn btn-sm btn-outline-primary w-100 text-nowrap d-flex align-items-center justify-content-center">
+              <i class="bi bi-eye me-1"></i>Megtekintés
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeView()">
+          Bezárás
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
 <app-confirm-delete-partner
   *ngIf="deletingPartner"
   [open]="true"

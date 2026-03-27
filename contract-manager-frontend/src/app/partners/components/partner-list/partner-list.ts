@@ -25,6 +25,11 @@ export class PartnerListComponent implements OnInit {
   deleteLoading = false;
   deleteError?: string;
 
+  viewingPartner?: PartnerWithStats;
+
+  // 🔥 EZ AZ ÚJ STATE
+  copiedField?: string;
+
   ngOnInit(): void {
     this.load();
   }
@@ -56,9 +61,7 @@ export class PartnerListComponent implements OnInit {
   }
 
   confirmDelete(): void {
-    if (!this.deletingPartner) {
-      return;
-    }
+    if (!this.deletingPartner) return;
 
     this.deleteLoading = true;
     this.deleteError = undefined;
@@ -74,6 +77,28 @@ export class PartnerListComponent implements OnInit {
         this.deleteLoading = false;
       }
     });
+  }
+
+  openView(partner: PartnerWithStats): void {
+    this.viewingPartner = partner;
+  }
+
+  closeView(): void {
+    this.viewingPartner = undefined;
+    this.copiedField = undefined;
+  }
+
+  // 🔥 MÁSOLÁS + VISSZAJELZÉS
+  copy(value: string | undefined | null, field: string): void {
+    if (!value) return;
+
+    navigator.clipboard.writeText(value);
+
+    this.copiedField = field;
+
+    setTimeout(() => {
+      this.copiedField = undefined;
+    }, 1500);
   }
 
   trackById(_: number, partner: PartnerWithStats): number {

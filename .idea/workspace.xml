@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af446817-ba37-4094-88f6-0496202713e7" name="Changes" comment="Alapok">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/contract-manager-frontend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/auth/auth.service.ts" afterDir="false" />
+    <list default="true" id="af446817-ba37-4094-88f6-0496202713e7" name="Changes" comment="cleanup: remove .idea from repo">
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +99,7 @@
       <workItem from="1770288092658" duration="1905000" />
       <workItem from="1770461541810" duration="1247000" />
       <workItem from="1774256134482" duration="4147000" />
-      <workItem from="1774599706355" duration="1986000" />
+      <workItem from="1774599706355" duration="5220000" />
     </task>
     <task id="LOCAL-00001" summary="Frontend váz kész">
       <option name="closed" value="true" />
@@ -124,7 +117,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774599763754</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="cleanup: remove .idea from repo">
+      <option name="closed" value="true" />
+      <created>1774624256300</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774624256300</updated>
+    </task>
+    <task id="LOCAL-00004" summary="cleanup: remove .idea from repo">
+      <option name="closed" value="true" />
+      <created>1774624278700</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1774624278700</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,7 +142,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Frontend váz kész" />
     <MESSAGE value="Alapok" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alapok" />
+    <MESSAGE value="cleanup: remove .idea from repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup: remove .idea from repo" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
