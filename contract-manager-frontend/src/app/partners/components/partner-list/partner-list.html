@@ -1,0 +1,86 @@
+<h2 class="mb-3">Partnerek</h2>
+
+<!-- Loading -->
+<div *ngIf="loading" class="alert alert-info">
+  Partner lista betöltése…
+</div>
+
+<!-- Error -->
+<div *ngIf="error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Empty -->
+<div *ngIf="!loading && !error && partners.length === 0" class="alert alert-secondary">
+  Nincs még rögzített partner.
+</div>
+
+<!-- Table -->
+<div *ngIf="!loading && !error && partners.length > 0" class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-light">
+    <tr>
+      <th>Név</th>
+      <th>Adószám</th>
+      <th>Email</th>
+      <th>Telefon</th>
+      <th class="text-center">Aktív</th>
+      <th class="text-center">Lejárt</th>
+      <th class="text-end">Műveletek</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let partner of partners; trackBy: trackById">
+      <td class="fw-semibold">{{ partner.name }}</td>
+
+      <td>
+        <span class="font-monospace">{{ partner.taxNumber }}</span>
+      </td>
+
+      <td>{{ partner.email || '-' }}</td>
+      <td>{{ partner.phone || '-' }}</td>
+
+      <td class="text-center">
+          <span
+            class="badge"
+            [class.bg-success]="partner.activeContracts > 0"
+            [class.bg-secondary]="partner.activeContracts === 0"
+          >
+            {{ partner.activeContracts }}
+          </span>
+      </td>
+
+      <td class="text-center">
+          <span class="badge bg-secondary">
+            {{ partner.expiredContracts }}
+          </span>
+      </td>
+
+      <td class="text-end">
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="openDelete(partner)"
+        >
+          Törlés
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DELETE CONFIRM MODAL (bekötve TS-ben) -->
+<app-confirm-delete-partner
+  *ngIf="deletingPartner"
+  [open]="true"
+  [partnerName]="deletingPartner.name"
+  [partnerTaxNumber]="deletingPartner.taxNumber"
+  [activeContracts]="deletingPartner.activeContracts"
+  [expiredContracts]="deletingPartner.expiredContracts"
+  [loading]="deleteLoading"
+  [error]="deleteError"
+  (cancel)="cancelDelete()"
+  (confirm)="confirmDelete()"
+>
+</app-confirm-delete-partner>

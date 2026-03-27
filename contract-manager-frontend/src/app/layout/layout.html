@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-3">
+  <a class="navbar-brand" routerLink="/partners">
+    Contract Manager
+  </a>
+
+  <ul class="navbar-nav me-auto">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/partners" routerLinkActive="active">
+        Partnerek
+      </a>
+    </li>
+
+    <li class="nav-item" *ngIf="isAdmin()">
+      <a class="nav-link" routerLink="/partners/new" routerLinkActive="active">
+        Új partner
+      </a>
+    </li>
+  </ul>
+
+  <button class="btn btn-outline-light btn-sm" (click)="logout()">
+    Kijelentkezés
+  </button>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

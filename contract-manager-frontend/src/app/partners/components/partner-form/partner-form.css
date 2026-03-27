@@ -1,0 +1,50 @@
+.partner-form {
+  max-width: 640px;
+}
+
+.form-section {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.tax-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-primary {
+  padding: 10px 18px;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  padding: 8px 14px;
+}
+
+.actions {
+  margin-top: 24px;
+}
+
+.error {
+  color: #c62828;
+  font-size: 13px;
+  margin-top: 4px;
+}

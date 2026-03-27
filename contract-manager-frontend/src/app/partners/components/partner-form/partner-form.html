@@ -1,0 +1,69 @@
+<h2>Új partner</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="partner-form">
+
+  <!-- Adószám blokk -->
+  <div class="form-section">
+    <label class="form-label">Adószám *</label>
+
+    <div class="tax-row">
+      <input
+        type="text"
+        formControlName="taxNumber"
+        placeholder="12345678"
+        class="form-input"
+      />
+
+      <button
+        type="button"
+        class="btn-secondary"
+        (click)="lookup()"
+        [disabled]="form.controls.taxNumber.invalid || lookupLoading"
+      >
+        {{ lookupLoading ? 'Lekérdezés…' : 'Adatok lekérése' }}
+      </button>
+    </div>
+
+    <small class="error" *ngIf="form.controls.taxNumber.touched && form.controls.taxNumber.invalid">
+      Érvénytelen adószám
+    </small>
+  </div>
+
+  <!-- Cégnév -->
+  <div class="form-section">
+    <label class="form-label">Partner neve *</label>
+    <input type="text" formControlName="name" class="form-input" />
+    <small class="error" *ngIf="form.controls.name.touched && form.controls.name.invalid">
+      Kötelező mező
+    </small>
+  </div>
+
+  <!-- Cím -->
+  <div class="form-section">
+    <label class="form-label">Cím</label>
+    <input type="text" formControlName="address" class="form-input" />
+  </div>
+
+  <!-- Kapcsolat -->
+  <div class="form-grid">
+    <div>
+      <label class="form-label">Email</label>
+      <input type="email" formControlName="email" class="form-input" />
+    </div>
+
+    <div>
+      <label class="form-label">Telefonszám</label>
+      <input type="text" formControlName="phone" class="form-input" />
+    </div>
+  </div>
+
+  <!-- Globális hiba -->
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <!-- Gomb -->
+  <div class="actions">
+    <button type="submit" class="btn-primary" [disabled]="form.invalid || loading">
+      {{ loading ? 'Mentés…' : 'Partner mentése' }}
+    </button>
+  </div>
+</form>

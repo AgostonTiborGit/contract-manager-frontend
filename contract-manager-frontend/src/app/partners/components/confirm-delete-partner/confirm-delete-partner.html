@@ -1,0 +1,70 @@
+<div class="modal-backdrop-custom" *ngIf="open">
+  <div class="modal-custom">
+
+    <div class="modal-header">
+      <h5 class="modal-title text-danger">Partner törlése</h5>
+      <button type="button" class="btn-close" (click)="close()"></button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="alert alert-danger">
+        <div class="fw-bold mb-1">FIGYELEM!</div>
+        <div>
+          A partner törlésével az összes szerződése is törlődik:
+        </div>
+        <ul class="mb-0">
+          <li>Aktív: <strong>{{ activeContracts }}</strong></li>
+          <li>Lejárt: <strong>{{ expiredContracts }}</strong></li>
+        </ul>
+      </div>
+
+      <div class="mb-3">
+        <div class="fw-semibold">{{ partnerName }}</div>
+        <div class="text-muted small">Adószám: {{ partnerTaxNumber }}</div>
+      </div>
+
+      <label class="form-label">
+        A törlés megerősítéséhez írd be pontosan:
+        <strong>IGEN</strong>
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="IGEN"
+        [formControl]="form.controls.confirmText"
+        [class.is-invalid]="form.controls.confirmText.touched && form.controls.confirmText.invalid"
+        autocomplete="off"
+      />
+
+      <div class="invalid-feedback">
+        Pontosan ezt kell beírni: IGEN
+      </div>
+
+      <div *ngIf="error" class="text-danger mt-2 small">
+        {{ error }}
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="close()" [disabled]="loading">
+        Mégse
+      </button>
+
+      <button
+        class="btn btn-danger"
+        (click)="doConfirm()"
+        [disabled]="form.invalid || loading"
+      >
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm me-2"
+        ></span>
+        TÖRLÉS MINDENESTŐL
+      </button>
+    </div>
+
+  </div>
+</div>
