@@ -1,0 +1,146 @@
+<h2 class="mb-2">Új szerződés</h2>
+
+<p class="text-muted mb-4" *ngIf="partner">
+  Partner:
+  <strong>{{ partner.name }}</strong>
+  <span class="ms-2" *ngIf="partner.taxNumber">| Adószám: {{ partner.taxNumber }}</span>
+</p>
+
+<div class="d-flex gap-2 mb-3">
+  <a class="btn btn-outline-secondary" [routerLink]="['/partners', partnerId, 'contracts']">
+    ← Vissza a szerződésekhez
+  </a>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading" class="alert alert-info">
+  Partner adatainak betöltése…
+</div>
+
+<!-- Error -->
+<div *ngIf="error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Form -->
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <div class="row g-3">
+
+        <!-- TITLE -->
+        <div class="col-md-6">
+          <label class="form-label">Cím *</label>
+          <input type="text" class="form-control" formControlName="title">
+          <div class="text-danger small mt-1" *ngIf="isInvalid('title')">
+            A cím megadása kötelező.
+          </div>
+        </div>
+
+        <!-- REFERENCE NUMBER -->
+        <div class="col-md-6">
+          <label class="form-label">Hivatkozási szám</label>
+          <input type="text" class="form-control" formControlName="referenceNumber">
+        </div>
+
+        <!-- CONTRACT TYPE -->
+        <div class="col-md-6">
+          <label class="form-label">Szerződéstípus *</label>
+          <select class="form-select" formControlName="contractType">
+            <option *ngFor="let type of contractTypes" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- FIXED TERM -->
+        <div class="col-md-6">
+          <label class="form-label d-block">Időtartam *</label>
+
+          <div class="form-check form-check-inline">
+            <input
+              id="fixedTermTrue"
+              class="form-check-input"
+              type="radio"
+              [value]="true"
+              formControlName="fixedTerm">
+            <label for="fixedTermTrue" class="form-check-label">
+              Határozott
+            </label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              id="fixedTermFalse"
+              class="form-check-input"
+              type="radio"
+              [value]="false"
+              formControlName="fixedTerm">
+            <label for="fixedTermFalse" class="form-check-label">
+              Határozatlan
+            </label>
+          </div>
+        </div>
+
+        <!-- START DATE -->
+        <div class="col-md-6">
+          <label class="form-label">Kezdődátum *</label>
+          <input type="date" class="form-control" formControlName="startDate">
+          <div class="text-danger small mt-1" *ngIf="isInvalid('startDate')">
+            A kezdődátum megadása kötelező.
+          </div>
+        </div>
+
+        <!-- END DATE -->
+        <div class="col-md-6">
+          <label class="form-label">Végdátum</label>
+          <input type="date" class="form-control" formControlName="endDate">
+        </div>
+
+        <!-- NOTICE PERIOD -->
+        <div class="col-md-6">
+          <label class="form-label">Felmondási idő (nap)</label>
+          <input type="number" class="form-control" formControlName="noticePeriodDays" min="0">
+        </div>
+
+        <!-- AMOUNT -->
+        <div class="col-md-3">
+          <label class="form-label">Összeg</label>
+          <input type="number" class="form-control" formControlName="amount" min="0" step="0.01">
+        </div>
+
+        <!-- CURRENCY -->
+        <div class="col-md-3">
+          <label class="form-label">Pénznem</label>
+          <select class="form-select" formControlName="currency">
+            <option value="">-- válassz --</option>
+            <option *ngFor="let currency of currencies" [value]="currency.value">
+              {{ currency.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- NOTES -->
+        <div class="col-12">
+          <label class="form-label">Megjegyzés</label>
+          <textarea
+            class="form-control"
+            rows="4"
+            formControlName="notes"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-end gap-2">
+      <a class="btn btn-outline-secondary" [routerLink]="['/partners', partnerId, 'contracts']">
+        Mégse
+      </a>
+
+      <button type="submit" class="btn btn-primary" [disabled]="saving">
+        {{ saving ? 'Mentés...' : 'Szerződés mentése' }}
+      </button>
+    </div>
+  </div>
+</form>

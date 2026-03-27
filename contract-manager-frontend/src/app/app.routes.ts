@@ -5,6 +5,7 @@ import { authGuard } from './auth/auth.guard';
 import { PartnerListComponent } from './partners/components/partner-list/partner-list';
 import { PartnerFormComponent } from './partners/components/partner-form/partner-form';
 import { PartnerContractListComponent } from './contracts/components/partner-contract-list/partner-contract-list';
+import { ContractFormComponent } from './contracts/components/contract-form/contract-form';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,9 @@ export const routes: Routes = [
 
       // Partnerhez tartozó szerződéslista oldal.
       { path: 'partners/:id/contracts', component: PartnerContractListComponent },
+
+      // Új szerződés létrehozása az adott partnerhez.
+      { path: 'partners/:id/contracts/new', component: ContractFormComponent },
 
       { path: '', redirectTo: 'partners', pathMatch: 'full' }
     ]

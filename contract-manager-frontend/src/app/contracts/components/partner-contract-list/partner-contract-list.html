@@ -9,6 +9,14 @@
   <a class="btn btn-outline-secondary" routerLink="/partners">
     ← Vissza a partnerekhez
   </a>
+
+  <a
+    class="btn btn-primary"
+    *ngIf="partner"
+    [routerLink]="['/partners', partner.id, 'contracts', 'new']"
+  >
+    + Új szerződés
+  </a>
 </div>
 
 <!-- Loading -->

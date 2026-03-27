@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Contract } from './contract.model';
+import { Contract, CreateContractRequest } from './contract.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +32,12 @@ export class ContractService {
   // Partnerhez tartozó szerződések lekérdezése.
   getByPartnerId(partnerId: number): Observable<Contract[]> {
     return this.http.get<Contract[]>(`/api/partners/${partnerId}/contracts`);
+  }
+
+  /* ================= COMMAND: CREATE CONTRACT ================= */
+
+  // Új szerződés létrehozása.
+  create(request: CreateContractRequest): Observable<void> {
+    return this.http.post<void>(this.baseUrl, request);
   }
 }
