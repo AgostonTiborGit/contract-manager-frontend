@@ -34,3 +34,20 @@ export interface Contract {
   currency?: Currency;
   partner: ContractPartner;
 }
+
+/* ================= CREATE REQUEST ================= */
+
+// Ez a backend CreateContractRequest DTO-jához igazodik.
+export interface CreateContractRequest {
+  title: string;
+  referenceNumber?: string;
+  contractType: ContractType;
+  fixedTerm: boolean;
+  startDate: string;
+  endDate?: string;
+  noticePeriodDays?: number;
+  notes?: string;
+  amount?: number;
+  currency?: Currency;
+  partnerId: number;
+}

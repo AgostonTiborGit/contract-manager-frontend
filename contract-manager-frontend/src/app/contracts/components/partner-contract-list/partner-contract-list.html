@@ -47,6 +47,7 @@
       <th>Vége</th>
       <th>Összeg</th>
       <th>Felmondási idő</th>
+      <th class="text-end">Műveletek</th>
     </tr>
     </thead>
 
@@ -76,6 +77,15 @@
 
       <td>
         {{ contract.noticePeriodDays != null ? (contract.noticePeriodDays + ' nap') : '-' }}
+      </td>
+
+      <td class="text-end">
+        <a
+          class="btn btn-sm btn-outline-primary"
+          [routerLink]="['/contracts', contract.id, 'files']"
+        >
+          Dokumentumok
+        </a>
       </td>
     </tr>
     </tbody>
