@@ -14,6 +14,7 @@ export const routes: Routes = [
     children: [
       { path: 'partners', component: PartnerListComponent },
       { path: 'partners/new', component: PartnerFormComponent },
+      { path: 'partners/:id/edit', component: PartnerFormComponent },
       { path: '', redirectTo: 'partners', pathMatch: 'full' }
     ]
   },

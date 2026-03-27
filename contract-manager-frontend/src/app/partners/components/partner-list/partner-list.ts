@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { PartnerService, PartnerWithStats } from '../../partner.service';
 import { ConfirmDeletePartnerComponent } from '../confirm-delete-partner/confirm-delete-partner';
 
@@ -8,6 +9,7 @@ import { ConfirmDeletePartnerComponent } from '../confirm-delete-partner/confirm
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     ConfirmDeletePartnerComponent
   ],
   templateUrl: './partner-list.html',
@@ -26,8 +28,6 @@ export class PartnerListComponent implements OnInit {
   deleteError?: string;
 
   viewingPartner?: PartnerWithStats;
-
-  // 🔥 EZ AZ ÚJ STATE
   copiedField?: string;
 
   ngOnInit(): void {
@@ -88,7 +88,6 @@ export class PartnerListComponent implements OnInit {
     this.copiedField = undefined;
   }
 
-  // 🔥 MÁSOLÁS + VISSZAJELZÉS
   copy(value: string | undefined | null, field: string): void {
     if (!value) return;
 

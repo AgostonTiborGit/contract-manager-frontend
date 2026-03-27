@@ -68,13 +68,12 @@
             <i class="bi bi-eye me-1"></i>Megtekintés
           </button>
 
-          <button
-            type="button"
+          <a
             class="btn btn-sm btn-outline-secondary text-nowrap"
-            disabled
+            [routerLink]="['/partners', partner.id, 'edit']"
           >
             <i class="bi bi-pencil me-1"></i>Szerkesztés
-          </button>
+          </a>
 
           <button
             type="button"

@@ -22,9 +22,6 @@ export class PartnerService {
     return this.http.get<Partner[]>(this.baseUrl);
   }
 
-  /**
-   * Partner lista szerződés statisztikával
-   */
   getAllWithStats(): Observable<PartnerWithStats[]> {
     return this.http.get<PartnerWithStats[]>(`${this.baseUrl}/with-stats`);
   }
@@ -37,6 +34,10 @@ export class PartnerService {
 
   create(partner: Omit<Partner, 'id'>): Observable<Partner> {
     return this.http.post<Partner>(this.baseUrl, partner);
+  }
+
+  update(id: number, partner: Omit<Partner, 'id'>): Observable<Partner> {
+    return this.http.put<Partner>(`${this.baseUrl}/${id}`, partner);
   }
 
   delete(id: number): Observable<void> {
