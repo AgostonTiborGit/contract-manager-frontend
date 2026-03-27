@@ -11,7 +11,7 @@ export interface AuthUser {
 export class AuthService {
 
   private readonly AUTH_HEADER_KEY = 'authHeader';
-  private readonly ME_URL = 'http://localhost:8080/api/auth/me';
+  private readonly ME_URL = '/api/auth/me';
 
   private userSubject = new BehaviorSubject<AuthUser | null>(null);
   user$ = this.userSubject.asObservable();
