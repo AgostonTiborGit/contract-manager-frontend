@@ -1,3 +1,21 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './login/login';
+import { LayoutComponent } from './layout/layout';
+import { authGuard } from './auth/auth.guard';
+import { PartnerListComponent } from './partners/components/partner-list/partner-list';
+import { PartnerFormComponent } from './partners/components/partner-form/partner-form';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: 'partners', component: PartnerListComponent },
+      { path: 'partners/new', component: PartnerFormComponent },
+      { path: '', redirectTo: 'partners', pathMatch: 'full' }
+    ]
+  },
+  { path: '**', redirectTo: 'partners' }
+];
