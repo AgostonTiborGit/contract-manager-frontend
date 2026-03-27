@@ -1,0 +1,89 @@
+<h2 class="mb-2">Partner szerződései</h2>
+
+<p class="text-muted mb-4" *ngIf="partner">
+  <strong>{{ partner.name }}</strong>
+  <span class="ms-2" *ngIf="partner.taxNumber">| Adószám: {{ partner.taxNumber }}</span>
+</p>
+
+<div class="d-flex gap-2 mb-3">
+  <a class="btn btn-outline-secondary" routerLink="/partners">
+    ← Vissza a partnerekhez
+  </a>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading" class="alert alert-info">
+  Szerződéslista betöltése…
+</div>
+
+<!-- Error -->
+<div *ngIf="error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Empty -->
+<div *ngIf="!loading && !error && contracts.length === 0" class="alert alert-secondary">
+  Ehhez a partnerhez még nincs rögzített szerződés.
+</div>
+
+<!-- Table -->
+<div *ngIf="!loading && !error && contracts.length > 0" class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-light">
+    <tr>
+      <th>Cím</th>
+      <th>Hivatkozási szám</th>
+      <th>Típus</th>
+      <th>Státusz</th>
+      <th>Kezdete</th>
+      <th>Vége</th>
+      <th>Összeg</th>
+      <th>Felmondási idő</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let contract of contracts; trackBy: trackById">
+      <td class="fw-semibold">{{ contract.title }}</td>
+
+      <td>
+        <span class="font-monospace">{{ contract.referenceNumber || '-' }}</span>
+      </td>
+
+      <td>{{ getContractTypeLabel(contract.contractType) }}</td>
+
+      <td>
+        <span class="badge" [ngClass]="getStatusClass(contract)">
+          {{ getStatusLabel(contract) }}
+        </span>
+      </td>
+
+      <td>{{ contract.startDate }}</td>
+
+      <td>
+        {{ contract.endDate || '-' }}
+      </td>
+
+      <td>{{ formatAmount(contract) }}</td>
+
+      <td>
+        {{ contract.noticePeriodDays != null ? (contract.noticePeriodDays + ' nap') : '-' }}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Notes cards -->
+<div *ngIf="!loading && !error && contracts.length > 0" class="mt-4">
+  <h4 class="mb-3">Megjegyzések</h4>
+
+  <div class="card mb-3" *ngFor="let contract of contracts; trackBy: trackById">
+    <div class="card-body">
+      <h5 class="card-title mb-2">{{ contract.title }}</h5>
+      <p class="card-text mb-0 text-muted">
+        {{ contract.notes || 'Nincs megjegyzés.' }}
+      </p>
+    </div>
+  </div>
+</div>
