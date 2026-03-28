@@ -58,12 +58,17 @@
         <div class="col-md-6">
           <label class="form-label d-block">Időtartam *</label>
 
+          <!--
+            FONTOS:
+            boolean érték kell a formba, ezért [ngValue]-t használunk.
+            [value] esetén "true"/"false" stringgé csúszhat.
+          -->
           <div class="form-check form-check-inline">
             <input
               id="fixedTermTrue"
               class="form-check-input"
               type="radio"
-              [value]="true"
+              [ngValue]="true"
               formControlName="fixedTerm">
             <label for="fixedTermTrue" class="form-check-label">
               Határozott
@@ -75,7 +80,7 @@
               id="fixedTermFalse"
               class="form-check-input"
               type="radio"
-              [value]="false"
+              [ngValue]="false"
               formControlName="fixedTerm">
             <label for="fixedTermFalse" class="form-check-label">
               Határozatlan

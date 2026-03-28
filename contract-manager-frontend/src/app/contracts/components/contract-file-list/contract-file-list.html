@@ -28,14 +28,14 @@
 <!-- Upload card -->
 <div *ngIf="!loading && contract" class="card shadow-sm mb-4">
   <div class="card-header">
-    <strong>Új PDF feltöltése</strong>
+    <strong>PDF feltöltése</strong>
   </div>
 
   <div class="card-body">
     <div class="row g-3">
 
       <!-- FILE -->
-      <div class="col-md-6">
+      <div class="col-12">
         <label class="form-label">PDF fájl *</label>
         <input
           type="file"
@@ -43,34 +43,6 @@
           accept="application/pdf,.pdf"
           (change)="onFileSelected($event)"
         >
-      </div>
-
-      <!-- DISPLAY NAME -->
-      <div class="col-md-6">
-        <label class="form-label">Megjelenítendő név (opcionális)</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="displayName"
-          name="displayName"
-          placeholder="pl. Eredeti szerződés"
-        >
-      </div>
-
-      <!-- PRIMARY -->
-      <div class="col-12">
-        <div class="form-check">
-          <input
-            id="primaryFile"
-            class="form-check-input"
-            type="checkbox"
-            [(ngModel)]="primaryFile"
-            name="primaryFile"
-          >
-          <label class="form-check-label" for="primaryFile">
-            Legyen ez az elsődleges dokumentum
-          </label>
-        </div>
       </div>
     </div>
 

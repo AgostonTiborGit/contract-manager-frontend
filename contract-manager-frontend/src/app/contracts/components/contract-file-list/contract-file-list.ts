@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { ContractService } from '../../contract.service';
 import { Contract } from '../../contract.model';
 import { ContractFileService } from '../../contract-file.service';
@@ -12,8 +11,7 @@ import { ContractFile } from '../../contract-file.model';
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule
+    RouterModule
   ],
   templateUrl: './contract-file-list.html'
 })
@@ -34,8 +32,6 @@ export class ContractFileListComponent implements OnInit {
   uploadError?: string;
 
   selectedFile?: File;
-  displayName = '';
-  primaryFile = false;
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -112,6 +108,8 @@ export class ContractFileListComponent implements OnInit {
 
   /* ================= UPLOAD ================= */
 
+  // Első körben a legegyszerűbb UX-et tartjuk meg:
+  // kiválasztott PDF -> feltöltés.
   upload(): void {
     if (!this.selectedFile || this.uploading) {
       return;
@@ -120,17 +118,10 @@ export class ContractFileListComponent implements OnInit {
     this.uploading = true;
     this.uploadError = undefined;
 
-    this.contractFileService.upload(
-      this.contractId,
-      this.selectedFile,
-      this.displayName,
-      this.primaryFile
-    ).subscribe({
+    this.contractFileService.upload(this.contractId, this.selectedFile).subscribe({
       next: () => {
         this.uploading = false;
         this.selectedFile = undefined;
-        this.displayName = '';
-        this.primaryFile = false;
         this.loadFiles();
       },
       error: (err: any) => {
