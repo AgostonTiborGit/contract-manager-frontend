@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PartnerService, PartnerWithStats } from '../../partner.service';
 import { ConfirmDeletePartnerComponent } from '../confirm-delete-partner/confirm-delete-partner';
@@ -9,6 +10,7 @@ import { ConfirmDeletePartnerComponent } from '../confirm-delete-partner/confirm
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     ConfirmDeletePartnerComponent
   ],
@@ -22,6 +24,8 @@ export class PartnerListComponent implements OnInit {
   partners: PartnerWithStats[] = [];
   loading = false;
   error?: string;
+
+  searchTerm = '';
 
   deletingPartner?: PartnerWithStats;
   deleteLoading = false;
@@ -50,6 +54,38 @@ export class PartnerListComponent implements OnInit {
     });
   }
 
+  get filteredPartners(): PartnerWithStats[] {
+    const term = this.searchTerm.trim().toLowerCase();
+
+    if (!term) {
+      return this.partners;
+    }
+
+    return this.partners.filter((partner: PartnerWithStats) =>
+      partner.name.toLowerCase().includes(term) ||
+      partner.taxNumber.toLowerCase().includes(term) ||
+      (partner.email ?? '').toLowerCase().includes(term) ||
+      (partner.phone ?? '').toLowerCase().includes(term) ||
+      (partner.address ?? '').toLowerCase().includes(term)
+    );
+  }
+
+  get totalPartners(): number {
+    return this.partners.length;
+  }
+
+  get totalActiveContracts(): number {
+    return this.partners.reduce((sum, partner) => sum + partner.activeContracts, 0);
+  }
+
+  get totalExpiredContracts(): number {
+    return this.partners.reduce((sum, partner) => sum + partner.expiredContracts, 0);
+  }
+
+  clearSearch(): void {
+    this.searchTerm = '';
+  }
+
   openDelete(partner: PartnerWithStats): void {
     this.deletingPartner = partner;
     this.deleteError = undefined;
@@ -61,7 +97,9 @@ export class PartnerListComponent implements OnInit {
   }
 
   confirmDelete(): void {
-    if (!this.deletingPartner) return;
+    if (!this.deletingPartner) {
+      return;
+    }
 
     this.deleteLoading = true;
     this.deleteError = undefined;
@@ -89,7 +127,9 @@ export class PartnerListComponent implements OnInit {
   }
 
   copy(value: string | undefined | null, field: string): void {
-    if (!value) return;
+    if (!value) {
+      return;
+    }
 
     navigator.clipboard.writeText(value);
 

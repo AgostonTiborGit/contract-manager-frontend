@@ -6,6 +6,12 @@
       <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/partner-contract-list/partner-contract-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/partner-contract-list/partner-contract-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/contract-file.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/contract-file.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.css" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +108,7 @@
       <workItem from="1770461541810" duration="1247000" />
       <workItem from="1774256134482" duration="4147000" />
       <workItem from="1774599706355" duration="16401000" />
-      <workItem from="1774686554505" duration="691000" />
+      <workItem from="1774686554505" duration="4364000" />
     </task>
     <task id="LOCAL-00001" summary="Frontend váz kész">
       <option name="closed" value="true" />
@@ -176,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774655645872</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="File handling">
+      <option name="closed" value="true" />
+      <created>1774687257681</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1774687257681</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

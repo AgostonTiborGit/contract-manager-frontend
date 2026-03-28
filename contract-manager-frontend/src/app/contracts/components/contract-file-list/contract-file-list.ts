@@ -30,6 +30,7 @@ export class ContractFileListComponent implements OnInit {
   uploading = false;
   error?: string;
   uploadError?: string;
+  actionError?: string;
 
   selectedFile?: File;
 
@@ -51,9 +52,6 @@ export class ContractFileListComponent implements OnInit {
     this.loadPage();
   }
 
-  /* ================= LOAD PAGE ================= */
-
-  // Először betöltjük a szerződés metaadatait, aztán a fájlokat.
   private loadPage(): void {
     this.loading = true;
     this.error = undefined;
@@ -83,13 +81,12 @@ export class ContractFileListComponent implements OnInit {
     });
   }
 
-  /* ================= FILE INPUT ================= */
-
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
 
     this.uploadError = undefined;
+    this.actionError = undefined;
 
     if (!file) {
       this.selectedFile = undefined;
@@ -106,10 +103,6 @@ export class ContractFileListComponent implements OnInit {
     this.selectedFile = file;
   }
 
-  /* ================= UPLOAD ================= */
-
-  // Első körben a legegyszerűbb UX-et tartjuk meg:
-  // kiválasztott PDF -> feltöltés.
   upload(): void {
     if (!this.selectedFile || this.uploading) {
       return;
@@ -117,6 +110,7 @@ export class ContractFileListComponent implements OnInit {
 
     this.uploading = true;
     this.uploadError = undefined;
+    this.actionError = undefined;
 
     this.contractFileService.upload(this.contractId, this.selectedFile).subscribe({
       next: () => {
@@ -131,10 +125,41 @@ export class ContractFileListComponent implements OnInit {
     });
   }
 
-  /* ================= HELPERS ================= */
+  openFile(file: ContractFile): void {
+    this.actionError = undefined;
 
-  getDownloadUrl(file: ContractFile): string {
-    return this.contractFileService.getDownloadUrl(file.id);
+    this.contractFileService.download(file.id).subscribe({
+      next: (blob: Blob) => {
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, '_blank', 'noopener');
+
+        setTimeout(() => {
+          URL.revokeObjectURL(blobUrl);
+        }, 60000);
+      },
+      error: (err: any) => {
+        this.actionError = err?.error?.message ?? 'A fájl megnyitása sikertelen';
+      }
+    });
+  }
+
+  downloadFile(file: ContractFile): void {
+    this.actionError = undefined;
+
+    this.contractFileService.download(file.id).subscribe({
+      next: (blob: Blob) => {
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = file.originalFileName;
+        a.click();
+
+        URL.revokeObjectURL(blobUrl);
+      },
+      error: (err: any) => {
+        this.actionError = err?.error?.message ?? 'A fájl letöltése sikertelen';
+      }
+    });
   }
 
   getReadableSize(fileSize: number): string {
@@ -147,10 +172,6 @@ export class ContractFileListComponent implements OnInit {
     }
 
     return `${(fileSize / (1024 * 1024)).toFixed(2)} MB`;
-  }
-
-  getDisplayName(file: ContractFile): string {
-    return file.displayName || file.originalFileName;
   }
 
   trackById(_: number, file: ContractFile): number {

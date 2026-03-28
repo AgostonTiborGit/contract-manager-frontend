@@ -1,27 +1,153 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark px-3">
-  <a class="navbar-brand" routerLink="/partners">
-    Contract Manager
-  </a>
+<nav class="app-navbar">
+  <div class="app-navbar-left">
+    <a class="app-brand" routerLink="/partners" (click)="onMenuAction()">
+      <span class="app-brand-title">Contract Manager</span>
+      <span class="app-brand-subtitle">Admin</span>
+    </a>
 
-  <ul class="navbar-nav me-auto">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/partners" routerLinkActive="active">
-        Partnerek
-      </a>
-    </li>
+    <div class="app-nav-group">
 
-    <li class="nav-item" *ngIf="isAdmin()">
-      <a class="nav-link" routerLink="/partners/new" routerLinkActive="active">
-        Új partner
-      </a>
-    </li>
-  </ul>
+      <div class="app-nav-item" [class.open]="openMenu === 'dashboard'">
+        <button
+          type="button"
+          class="app-nav-button"
+          (click)="toggleMenu('dashboard', $event)"
+        >
+          Dashboard
+          <span class="app-nav-caret">▾</span>
+        </button>
 
-  <button class="btn btn-outline-light btn-sm" (click)="logout()">
-    Kijelentkezés
-  </button>
+        <div class="app-nav-dropdown">
+          <button type="button" class="app-nav-link placeholder-link">
+            Áttekintés
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="app-nav-item" [class.open]="openMenu === 'lists'">
+        <button
+          type="button"
+          class="app-nav-button"
+          (click)="toggleMenu('lists', $event)"
+        >
+          Listák
+          <span class="app-nav-caret">▾</span>
+        </button>
+
+        <div class="app-nav-dropdown">
+          <a
+            class="app-nav-link"
+            routerLink="/partners"
+            routerLinkActive="active"
+            (click)="onMenuAction()"
+          >
+            Partnerek
+          </a>
+
+          <button type="button" class="app-nav-link placeholder-link">
+            Szerződések
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+
+          <button type="button" class="app-nav-link placeholder-link">
+            Dokumentumok
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="app-nav-item" [class.open]="openMenu === 'actions'">
+        <button
+          type="button"
+          class="app-nav-button"
+          (click)="toggleMenu('actions', $event)"
+        >
+          Műveletek
+          <span class="app-nav-caret">▾</span>
+        </button>
+
+        <div class="app-nav-dropdown">
+          <a
+            class="app-nav-link"
+            routerLink="/partners/new"
+            routerLinkActive="active"
+            (click)="onMenuAction()"
+          >
+            Új partner
+          </a>
+
+          <button type="button" class="app-nav-link placeholder-link">
+            Új szerződés
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="app-nav-item" [class.open]="openMenu === 'admin'" *ngIf="isAdmin()">
+        <button
+          type="button"
+          class="app-nav-button"
+          (click)="toggleMenu('admin', $event)"
+        >
+          Admin
+          <span class="app-nav-caret">▾</span>
+        </button>
+
+        <div class="app-nav-dropdown">
+          <button type="button" class="app-nav-link placeholder-link">
+            Felhasználók
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+
+          <button type="button" class="app-nav-link placeholder-link">
+            Jogosultságok
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+
+          <button type="button" class="app-nav-link placeholder-link">
+            Beállítások
+            <span class="coming-soon-badge">hamarosan</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="app-navbar-right">
+    <div class="app-user-box" [class.open]="openMenu === 'user'">
+      <button
+        type="button"
+        class="app-user-button"
+        (click)="toggleMenu('user', $event)"
+      >
+        <span class="app-user-avatar">
+          {{ getUserInitial((authService.user$ | async)?.email) }}
+        </span>
+
+        <span class="app-user-meta">
+          <span class="app-user-email">{{ (authService.user$ | async)?.email || 'Bejelentkezett felhasználó' }}</span>
+          <span class="app-user-role">{{ (authService.user$ | async)?.role || 'ROLE_USER' }}</span>
+        </span>
+
+        <span class="app-nav-caret">▾</span>
+      </button>
+
+      <div class="app-nav-dropdown app-user-dropdown">
+        <button type="button" class="app-nav-link placeholder-link">
+          Profil
+          <span class="coming-soon-badge">hamarosan</span>
+        </button>
+
+        <button type="button" class="app-nav-link danger-link" (click)="logout()">
+          Kijelentkezés
+        </button>
+      </div>
+    </div>
+  </div>
 </nav>
 
-<div class="container mt-4">
+<div class="app-page-container">
   <router-outlet></router-outlet>
 </div>

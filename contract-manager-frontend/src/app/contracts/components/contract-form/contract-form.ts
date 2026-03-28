@@ -32,8 +32,6 @@ export class ContractFormComponent implements OnInit {
   saving = false;
   error?: string;
 
-  /* ================= SELECT OPTIONS ================= */
-
   contractTypes: { value: ContractType; label: string }[] = [
     { value: 'SERVICE_AGREEMENT', label: 'Szolgáltatási szerződés' },
     { value: 'SALES_CONTRACT', label: 'Adásvételi szerződés' },
@@ -48,8 +46,6 @@ export class ContractFormComponent implements OnInit {
     { value: 'EUR', label: 'EUR' },
     { value: 'USD', label: 'USD' }
   ];
-
-  /* ================= FORM ================= */
 
   form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.maxLength(255)]],
@@ -83,8 +79,6 @@ export class ContractFormComponent implements OnInit {
     this.setupFixedTermHandling();
   }
 
-  /* ================= LOAD PARTNER ================= */
-
   private loadPartner(): void {
     this.loading = true;
     this.error = undefined;
@@ -101,14 +95,12 @@ export class ContractFormComponent implements OnInit {
     });
   }
 
-  /* ================= FORM BEHAVIOUR ================= */
-
-  // Határozatlan szerződésnél az endDate-t letiltjuk és ürítjük.
   private setupFixedTermHandling(): void {
-    this.form.controls.fixedTerm.valueChanges.subscribe((fixedTerm: boolean) => {
+    this.form.controls.fixedTerm.valueChanges.subscribe((fixedTerm: any) => {
+      const isFixed = fixedTerm === true || fixedTerm === 'true';
       const endDateControl = this.form.controls.endDate;
 
-      if (fixedTerm) {
+      if (isFixed) {
         endDateControl.enable({ emitEvent: false });
       } else {
         endDateControl.setValue('', { emitEvent: false });
@@ -116,8 +108,6 @@ export class ContractFormComponent implements OnInit {
       }
     });
   }
-
-  /* ================= SUBMIT ================= */
 
   submit(): void {
     if (this.form.invalid || this.saving || !this.partnerId) {
@@ -147,14 +137,12 @@ export class ContractFormComponent implements OnInit {
     });
   }
 
-  /* ================= REQUEST MAPPING ================= */
-
   private buildRequest(raw: any): CreateContractRequest | null {
     const title = raw.title?.trim();
     const referenceNumber = this.normalizeString(raw.referenceNumber);
     const notes = this.normalizeString(raw.notes);
 
-    const fixedTerm = raw.fixedTerm;
+    const fixedTerm = raw.fixedTerm === true || raw.fixedTerm === 'true';
     const startDate = raw.startDate;
     const endDate = raw.endDate || undefined;
 
@@ -197,31 +185,20 @@ export class ContractFormComponent implements OnInit {
     };
   }
 
-  /* ================= HELPERS ================= */
-
   private normalizeString(value: string | null | undefined): string | undefined {
-    if (!value) {
-      return undefined;
-    }
-
+    if (!value) return undefined;
     const trimmed = value.trim();
     return trimmed.length > 0 ? trimmed : undefined;
   }
 
-  private parseOptionalInteger(value: string | number | null | undefined): number | undefined {
-    if (value === null || value === undefined || value === '') {
-      return undefined;
-    }
-
+  private parseOptionalInteger(value: any): number | undefined {
+    if (value === null || value === undefined || value === '') return undefined;
     const parsed = Number(value);
     return Number.isNaN(parsed) ? undefined : parsed;
   }
 
-  private parseOptionalNumber(value: string | number | null | undefined): number | undefined {
-    if (value === null || value === undefined || value === '') {
-      return undefined;
-    }
-
+  private parseOptionalNumber(value: any): number | undefined {
+    if (value === null || value === undefined || value === '') return undefined;
     const parsed = Number(value);
     return Number.isNaN(parsed) ? undefined : parsed;
   }
