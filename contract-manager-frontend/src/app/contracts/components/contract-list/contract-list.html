@@ -1,30 +1,106 @@
 <section class="contract-list-page">
-
+  <!-- Oldalfejléc -->
   <div class="page-header">
-    <h1>Szerződések</h1>
-    <p>Globális szerződéslista (dashboard alap)</p>
+    <div>
+      <h1 class="page-title">Szerződések</h1>
+      <p class="page-subtitle">
+        Központi szerződéslista, amelyre az Irányítópult szűrői is mutatnak.
+      </p>
+    </div>
+
+    <!-- Egyszerű állapotjelzők a jelenlegi szűréshez -->
+    <div class="page-badges">
+      <span class="filter-badge" *ngIf="statusFilter === 'active'">
+        Szűrés: Aktív
+      </span>
+
+      <span class="filter-badge" *ngIf="statusFilter === 'expired'">
+        Szűrés: Lejárt
+      </span>
+
+      <span class="filter-badge" *ngIf="expiringWithinDays !== undefined">
+        Szűrés: {{ expiringWithinDays }} napon belül lejár
+      </span>
+    </div>
   </div>
 
-  <div *ngIf="loading">Betöltés...</div>
-  <div *ngIf="error">{{ error }}</div>
+  <!-- Loading állapot -->
+  <div class="state-card" *ngIf="loading">
+    <p class="state-text">Szerződések betöltése...</p>
+  </div>
 
-  <table *ngIf="!loading && !error" class="table">
-    <thead>
-    <tr>
-      <th>Szerződés</th>
-      <th>Kezdés</th>
-      <th>Lejárat</th>
-      <th>Dokumentumok</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let c of filteredContracts">
-      <td>{{ c.name }}</td>
-      <td>{{ c.startDate }}</td>
-      <td>{{ c.endDate || '-' }}</td>
-      <td>{{ c.documents?.length || 0 }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <!-- Hibaállapot -->
+  <div class="state-card error" *ngIf="!loading && error">
+    <p class="state-text">{{ error }}</p>
+  </div>
 
+  <!-- Üres lista állapot -->
+  <div class="state-card" *ngIf="!loading && !error && filteredContracts.length === 0">
+    <p class="state-text">Nincs megjeleníthető szerződés a jelenlegi szűrés mellett.</p>
+  </div>
+
+  <!-- Lista -->
+  <div class="list-card" *ngIf="!loading && !error && filteredContracts.length > 0">
+    <div class="list-card-header">
+      <h2 class="list-card-title">Találatok</h2>
+      <span class="list-card-count">{{ filteredContracts.length }} db</span>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="contract-table">
+        <thead>
+        <tr>
+          <th>Partner</th>
+          <th>Szerződés címe</th>
+          <th>Hivatkozási szám</th>
+          <th>Kezdés</th>
+          <th>Lejárat</th>
+          <th>Státusz</th>
+          <th>Művelet</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let contract of filteredContracts; trackBy: trackById">
+          <td class="partner-cell">
+            {{ getPartnerName(contract) }}
+          </td>
+
+          <td class="title-cell">
+            {{ contract.title }}
+          </td>
+
+          <td>
+            {{ getReferenceNumber(contract) }}
+          </td>
+
+          <td>
+            {{ contract.startDate }}
+          </td>
+
+          <td>
+            {{ contract.endDate || '-' }}
+          </td>
+
+          <td>
+              <span class="status-chip" [ngClass]="getStatusClass(contract)">
+                {{ getStatusLabel(contract) }}
+              </span>
+          </td>
+
+          <td>
+            <!-- Egyelőre a partnerhez tartozó szerződésnézetre visszük,
+                 mert külön contract details oldal még nincs -->
+            <a
+              class="action-link"
+              [routerLink]="['/partners', contract.partner.id, 'contracts']"
+            >
+              Megnyitás
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>

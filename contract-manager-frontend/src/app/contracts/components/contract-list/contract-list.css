@@ -1,0 +1,247 @@
+:host {
+  display: block;
+}
+
+/* =========================
+   OLDAL ALAP
+   ========================= */
+.contract-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =========================
+   FEJLÉC
+   ========================= */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #111827;
+}
+
+.page-subtitle {
+  margin: 8px 0 0;
+  color: #6b7280;
+  font-size: 0.98rem;
+}
+
+.page-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* =========================
+   ÁLLAPOTKÁRTYÁK
+   ========================= */
+.state-card,
+.list-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+}
+
+.state-card {
+  padding: 24px;
+}
+
+.state-card.error {
+  border-color: #fecaca;
+  background: #fff7f7;
+}
+
+.state-text {
+  margin: 0;
+  color: #374151;
+  font-size: 0.98rem;
+}
+
+/* =========================
+   LISTAKÁRTYA
+   ========================= */
+.list-card {
+  overflow: hidden;
+}
+
+.list-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 0;
+  flex-wrap: wrap;
+}
+
+.list-card-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.list-card-count {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* =========================
+   TÁBLA
+   ========================= */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px 20px 20px;
+}
+
+.contract-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 950px;
+}
+
+.contract-table thead th {
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #6b7280;
+  padding: 12px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.contract-table tbody td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+  font-size: 0.94rem;
+  vertical-align: middle;
+}
+
+.contract-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.contract-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.partner-cell {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.title-cell {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* =========================
+   STÁTUSZ BADGE-EK
+   ========================= */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-expired {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-upcoming {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-indefinite {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* =========================
+   MŰVELET LINK
+   ========================= */
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: #eff6ff;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.action-link:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   RESZPONZÍV
+   ========================= */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .state-card {
+    padding: 18px;
+  }
+
+  .list-card-header {
+    padding: 16px 16px 0;
+  }
+
+  .table-wrapper {
+    padding: 12px 16px 16px;
+  }
+}
