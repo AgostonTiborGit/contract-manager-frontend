@@ -4,6 +4,9 @@
   background: #f5f7fb;
 }
 
+/* =========================
+   FŐ NAVBAR
+   ========================= */
 .app-navbar {
   position: sticky;
   top: 0;
@@ -12,6 +15,7 @@
   background: linear-gradient(90deg, #111827 0%, #1f2937 100%);
   color: #ffffff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,6 +30,9 @@
   gap: 18px;
 }
 
+/* =========================
+   BRAND / LOGÓ RÉSZ
+   ========================= */
 .app-brand {
   display: flex;
   flex-direction: column;
@@ -54,6 +61,9 @@
   margin-top: 2px;
 }
 
+/* =========================
+   NAVBAR MENÜK
+   ========================= */
 .app-nav-group {
   display: flex;
   align-items: center;
@@ -65,6 +75,7 @@
   position: relative;
 }
 
+/* Közös gombstílus a navbarban */
 .app-nav-button,
 .app-user-button {
   height: 42px;
@@ -77,9 +88,10 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
+/* Hover és nyitott állapot */
 .app-nav-button:hover,
 .app-user-button:hover,
 .app-nav-item.open .app-nav-button,
@@ -88,20 +100,56 @@
   color: #ffffff;
 }
 
+/* Külön stílus a direkt linkként működő navbar elemhez
+   pl. Irányítópult */
+.app-nav-direct-link {
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Direkt link hover */
+.app-nav-direct-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* Aktív állapot a direkt linkhez */
+.app-nav-direct-link.active {
+  color: #ffffff;
+  background: rgba(59, 130, 246, 0.15);
+}
+
+/* Alsó kiemelő csík az aktív Irányítópult menüponthoz */
+.app-nav-direct-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 8px;
+  right: 8px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
 .app-nav-caret {
   font-size: 0.8rem;
   opacity: 0.8;
 }
 
+/* =========================
+   DROPDOWN MENÜ
+   ========================= */
 .app-nav-dropdown {
   display: none;
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
   min-width: 240px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
   color: #111827;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 14px;
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18);
   padding: 10px;
@@ -147,22 +195,25 @@
   font-weight: 600;
 }
 
+/* Még nem kész menüpontok */
 .placeholder-link {
   color: #4b5563;
 }
 
+/* Fejlesztés alatt badge */
 .coming-soon-badge {
   display: inline-flex;
   align-items: center;
   padding: 3px 8px;
   border-radius: 999px;
-  background: #f3f4f6;
-  color: #6b7280;
+  background: #eef2ff;
+  color: #3730a3;
   font-size: 0.72rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
+/* Veszélyes művelet: kijelentkezés */
 .danger-link {
   color: #b91c1c;
 }
@@ -172,6 +223,9 @@
   color: #991b1b;
 }
 
+/* =========================
+   FELHASZNÁLÓI BLOKK
+   ========================= */
 .app-user-button {
   max-width: 360px;
   padding-right: 12px;
@@ -212,10 +266,16 @@
   letter-spacing: 0.03em;
 }
 
+/* =========================
+   OLDALTARTALOM
+   ========================= */
 .app-page-container {
   padding: 24px;
 }
 
+/* =========================
+   RESZPONZÍV
+   ========================= */
 @media (max-width: 1100px) {
   .app-navbar {
     flex-wrap: wrap;

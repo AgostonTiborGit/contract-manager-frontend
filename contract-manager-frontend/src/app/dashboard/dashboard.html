@@ -1,0 +1,144 @@
+<section class="dashboard-page">
+  <!-- Oldalfejléc -->
+  <div class="dashboard-header">
+    <div>
+      <h1 class="dashboard-title">Irányítópult</h1>
+      <p class="dashboard-subtitle">
+        Operatív áttekintés a partnerekről, szerződésekről és hiányosságokról.
+      </p>
+    </div>
+
+    <!-- Gyors műveletek -->
+    <div class="dashboard-actions">
+      <a class="dashboard-action-button primary" routerLink="/partners/new">
+        Új partner
+      </a>
+
+      <button type="button" class="dashboard-action-button secondary">
+        Új szerződés
+      </button>
+    </div>
+  </div>
+
+  <!-- Felső stat kártyák -->
+  <div class="stats-grid">
+    <a
+      class="stat-card"
+      *ngFor="let card of statCards"
+      [routerLink]="card.route"
+      [queryParams]="card.queryParams || null"
+    >
+      <div class="stat-card-top">
+        <span class="stat-card-title">{{ card.title }}</span>
+        <span class="stat-card-arrow">→</span>
+      </div>
+
+      <div class="stat-card-value">
+        {{ card.value }}
+      </div>
+
+      <div class="stat-card-description">
+        {{ card.description }}
+      </div>
+    </a>
+  </div>
+
+  <!-- Középső operatív blokk -->
+  <div class="dashboard-content-grid">
+    <!-- Lejáró / lejárt szerződések -->
+    <div class="panel-card">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Lejáró / lejárt szerződések</h2>
+          <p class="panel-subtitle">
+            Azok a tételek, amelyekre most érdemes ránézni.
+          </p>
+        </div>
+
+        <a
+          class="panel-link"
+          routerLink="/contracts"
+          [queryParams]="{ status: 'expired' }"
+        >
+          Összes megnyitása
+        </a>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="dashboard-table">
+          <thead>
+          <tr>
+            <th>Partner</th>
+            <th>Szerződés</th>
+            <th>Lejárat</th>
+            <th>Státusz</th>
+            <th>Dokumentum</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of attentionItems">
+            <td>{{ item.partnerName }}</td>
+            <td>{{ item.contractTitle }}</td>
+            <td>{{ item.dueDate }}</td>
+            <td>
+                <span class="status-chip warning">
+                  {{ item.status }}
+                </span>
+            </td>
+            <td>
+                <span class="status-chip" [ngClass]="getDocumentClass(item.hasDocument)">
+                  {{ getDocumentLabel(item.hasDocument) }}
+                </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Dokumentumhiányos szerződések -->
+    <div class="panel-card">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Dokumentumhiányos szerződések</h2>
+          <p class="panel-subtitle">
+            Azok a szerződések, ahol még nincs feltöltött fájl.
+          </p>
+        </div>
+
+        <a
+          class="panel-link"
+          routerLink="/contracts"
+          [queryParams]="{ missingDocuments: true }"
+        >
+          Összes megnyitása
+        </a>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="dashboard-table">
+          <thead>
+          <tr>
+            <th>Partner</th>
+            <th>Szerződés</th>
+            <th>Létrehozva</th>
+            <th>Dokumentumok</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of missingDocumentItems">
+            <td>{{ item.partnerName }}</td>
+            <td>{{ item.contractTitle }}</td>
+            <td>{{ item.createdAt }}</td>
+            <td>
+                <span class="status-chip status-missing">
+                  {{ item.documentCount }}
+                </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

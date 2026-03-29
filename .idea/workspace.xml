@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af446817-ba37-4094-88f6-0496202713e7" name="Changes" comment="File handling">
+    <list default="true" id="af446817-ba37-4094-88f6-0496202713e7" name="Changes" comment="Layout change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-file-list/contract-file-list.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/contract-form/contract-form.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/partner-contract-list/partner-contract-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/components/partner-contract-list/partner-contract-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/contract-file.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/contracts/contract-file.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.css" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/partners/components/partner-list/partner-list.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/layout/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/layout/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/layout/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/layout/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract-manager-frontend/src/app/layout/layout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/contract-manager-frontend/src/app/layout/layout.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,22 +55,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.partner-list.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "D:\\Projects\\contract-manager-frontend\\contract-manager-frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.partner-list.ts.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Projects\\contract-manager-frontend\\contract-manager-frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\contract-manager-frontend\contract-manager-frontend\src\app\partners" />
@@ -108,7 +103,8 @@
       <workItem from="1770461541810" duration="1247000" />
       <workItem from="1774256134482" duration="4147000" />
       <workItem from="1774599706355" duration="16401000" />
-      <workItem from="1774686554505" duration="4364000" />
+      <workItem from="1774686554505" duration="5850000" />
+      <workItem from="1774771392063" duration="1364000" />
     </task>
     <task id="LOCAL-00001" summary="Frontend váz kész">
       <option name="closed" value="true" />
@@ -190,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774687257681</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Layout change">
+      <option name="closed" value="true" />
+      <created>1774709301843</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1774709301843</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +209,8 @@
     <MESSAGE value="Contracts list" />
     <MESSAGE value="Parner contract list" />
     <MESSAGE value="File handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="File handling" />
+    <MESSAGE value="Layout change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Layout change" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

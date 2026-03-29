@@ -1,0 +1,30 @@
+<section class="contract-list-page">
+
+  <div class="page-header">
+    <h1>Szerződések</h1>
+    <p>Globális szerződéslista (dashboard alap)</p>
+  </div>
+
+  <div *ngIf="loading">Betöltés...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <table *ngIf="!loading && !error" class="table">
+    <thead>
+    <tr>
+      <th>Szerződés</th>
+      <th>Kezdés</th>
+      <th>Lejárat</th>
+      <th>Dokumentumok</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of filteredContracts">
+      <td>{{ c.name }}</td>
+      <td>{{ c.startDate }}</td>
+      <td>{{ c.endDate || '-' }}</td>
+      <td>{{ c.documents?.length || 0 }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>

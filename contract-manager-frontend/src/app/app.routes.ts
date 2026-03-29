@@ -2,36 +2,91 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login';
 import { LayoutComponent } from './layout/layout';
 import { authGuard } from './auth/auth.guard';
+import { DashboardComponent } from './dashboard/dashboard';
 import { PartnerListComponent } from './partners/components/partner-list/partner-list';
 import { PartnerFormComponent } from './partners/components/partner-form/partner-form';
 import { PartnerContractListComponent } from './contracts/components/partner-contract-list/partner-contract-list';
 import { ContractFormComponent } from './contracts/components/contract-form/contract-form';
 import { ContractFileListComponent } from './contracts/components/contract-file-list/contract-file-list';
+import { ContractListComponent } from './contracts/components/contract-list/contract-list';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  // Publikus bejelentkezési oldal.
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
+  // Védett alkalmazásrész.
+  // Minden belső oldal a közös layout alatt jelenik meg.
   {
     path: '',
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: 'partners', component: PartnerListComponent },
-      { path: 'partners/new', component: PartnerFormComponent },
-      { path: 'partners/:id/edit', component: PartnerFormComponent },
+      // Irányítópult.
+      // Ez az alap belépési oldal sikeres login után.
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
 
-      /* ================= PARTNER CONTRACTS ================= */
+      // Partner lista.
+      {
+        path: 'partners',
+        component: PartnerListComponent
+      },
 
-      // Partnerhez tartozó szerződéslista oldal.
-      { path: 'partners/:id/contracts', component: PartnerContractListComponent },
+      // Új partner létrehozása.
+      {
+        path: 'partners/new',
+        component: PartnerFormComponent
+      },
+
+      // Partner szerkesztése.
+      {
+        path: 'partners/:id/edit',
+        component: PartnerFormComponent
+      },
+
+      // Globális szerződéslista.
+      // Erre fognak mutatni a dashboard kártyák és a későbbi szűrések.
+      {
+        path: 'contracts',
+        component: ContractListComponent
+      },
+
+      // Az adott partnerhez tartozó szerződések listája.
+      {
+        path: 'partners/:id/contracts',
+        component: PartnerContractListComponent
+      },
 
       // Új szerződés létrehozása az adott partnerhez.
-      { path: 'partners/:id/contracts/new', component: ContractFormComponent },
+      {
+        path: 'partners/:id/contracts/new',
+        component: ContractFormComponent
+      },
 
-      // Szerződéshez tartozó dokumentumok.
-      { path: 'contracts/:id/files', component: ContractFileListComponent },
+      // Az adott szerződéshez tartozó dokumentumok listája.
+      {
+        path: 'contracts/:id/files',
+        component: ContractFileListComponent
+      },
 
-      { path: '', redirectTo: 'partners', pathMatch: 'full' }
+      // Ha a belső gyökérútvonalra érkezünk,
+      // automatikusan az Irányítópultra dobunk.
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      }
     ]
   },
-  { path: '**', redirectTo: 'partners' }
+
+  // Minden ismeretlen route az Irányítópultra menjen.
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
 ];

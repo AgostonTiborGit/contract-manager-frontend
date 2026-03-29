@@ -1,30 +1,24 @@
 <nav class="app-navbar">
   <div class="app-navbar-left">
-    <a class="app-brand" routerLink="/partners" (click)="onMenuAction()">
+    <!-- Márkalink: mostantól az Irányítópultra visz -->
+    <a class="app-brand" routerLink="/dashboard" (click)="onMenuAction()">
       <span class="app-brand-title">Contract Manager</span>
       <span class="app-brand-subtitle">Admin</span>
     </a>
 
     <div class="app-nav-group">
+      <!-- Irányítópult: nem dropdown, hanem rendes kattintható menüpont -->
+      <a
+        class="app-nav-button app-nav-direct-link"
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="onMenuAction()"
+      >
+        Irányítópult
+      </a>
 
-      <div class="app-nav-item" [class.open]="openMenu === 'dashboard'">
-        <button
-          type="button"
-          class="app-nav-button"
-          (click)="toggleMenu('dashboard', $event)"
-        >
-          Dashboard
-          <span class="app-nav-caret">▾</span>
-        </button>
-
-        <div class="app-nav-dropdown">
-          <button type="button" class="app-nav-link placeholder-link">
-            Áttekintés
-            <span class="coming-soon-badge">hamarosan</span>
-          </button>
-        </div>
-      </div>
-
+      <!-- Listák menü -->
       <div class="app-nav-item" [class.open]="openMenu === 'lists'">
         <button
           type="button"
@@ -47,16 +41,17 @@
 
           <button type="button" class="app-nav-link placeholder-link">
             Szerződések
-            <span class="coming-soon-badge">hamarosan</span>
+            <span class="coming-soon-badge">fejlesztés alatt</span>
           </button>
 
           <button type="button" class="app-nav-link placeholder-link">
             Dokumentumok
-            <span class="coming-soon-badge">hamarosan</span>
+            <span class="coming-soon-badge">fejlesztés alatt</span>
           </button>
         </div>
       </div>
 
+      <!-- Műveletek menü -->
       <div class="app-nav-item" [class.open]="openMenu === 'actions'">
         <button
           type="button"
@@ -79,11 +74,12 @@
 
           <button type="button" class="app-nav-link placeholder-link">
             Új szerződés
-            <span class="coming-soon-badge">hamarosan</span>
+            <span class="coming-soon-badge">fejlesztés alatt</span>
           </button>
         </div>
       </div>
 
+      <!-- Admin menü -->
       <div class="app-nav-item" [class.open]="openMenu === 'admin'" *ngIf="isAdmin()">
         <button
           type="button"
@@ -97,21 +93,20 @@
         <div class="app-nav-dropdown">
           <button type="button" class="app-nav-link placeholder-link">
             Felhasználók
-            <span class="coming-soon-badge">hamarosan</span>
+            <span class="coming-soon-badge">fejlesztés alatt</span>
           </button>
 
           <button type="button" class="app-nav-link placeholder-link">
             Jogosultságok
-            <span class="coming-soon-badge">hamarosan</span>
+            <span class="coming-soon-badge">fejlesztés alatt</span>
           </button>
 
           <button type="button" class="app-nav-link placeholder-link">
             Beállítások
-            <span class="coming-soon-badge">hamarosan</span>
+            <span class="coming-soon-badge">fejlesztés alatt</span>
           </button>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -127,8 +122,12 @@
         </span>
 
         <span class="app-user-meta">
-          <span class="app-user-email">{{ (authService.user$ | async)?.email || 'Bejelentkezett felhasználó' }}</span>
-          <span class="app-user-role">{{ (authService.user$ | async)?.role || 'ROLE_USER' }}</span>
+          <span class="app-user-email">
+            {{ (authService.user$ | async)?.email || 'Bejelentkezett felhasználó' }}
+          </span>
+          <span class="app-user-role">
+            {{ (authService.user$ | async)?.role || 'ROLE_USER' }}
+          </span>
         </span>
 
         <span class="app-nav-caret">▾</span>
@@ -137,7 +136,7 @@
       <div class="app-nav-dropdown app-user-dropdown">
         <button type="button" class="app-nav-link placeholder-link">
           Profil
-          <span class="coming-soon-badge">hamarosan</span>
+          <span class="coming-soon-badge">fejlesztés alatt</span>
         </button>
 
         <button type="button" class="app-nav-link danger-link" (click)="logout()">
